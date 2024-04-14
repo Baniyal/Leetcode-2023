@@ -28,9 +28,9 @@ def function(string: str,debug) -> int:
     for right in range(len(string)):
         if string[right] in char_set:
             while string[left] != string[right]:
+                char_set.remove(string[left])
                 left = left + 1
             left += 1
-            char_set.remove(string[right])
 
 
         char_set.add(string[right])
@@ -39,15 +39,19 @@ def function(string: str,debug) -> int:
             print(f"current character is {string[right]}")
             print(f"left index is at {left}")
             print(f"right index is at {right}")
+            print(f"character set is {char_set}")
+            print(f"longest substring so far is {string[left:right +1 ]}")
             print("---------------------------")
     return result
 
 TEST_CASES = [
+                ["tmmzuxt", 5],
                 ["abcabcbb"         ,       3],
                 ["bbbbb"            ,       1],
                 ["pwwkew"           ,       3],
                 [""                 ,       0],
                 ["d"                ,       1],
+
              ]
 
 DEBUG = False
