@@ -47,3 +47,29 @@ for test_case, expected_result in TEST_CASES:
     print("--------------------------------")
     if DEBUG:
         break
+"""
+================================================974=====================================================================
+Given an integer array nums and an integer k, return the number of non-empty subarrays that have a sum divisible by k.
+------------------------------------------------------------------------------------------------------------------------
+Input: nums = [4,5,0,-2,-3,1], k = 5
+Output: 7
+Explanation: There are 7 subarrays with a sum divisible by k = 5:
+[4, 5, 0, -2, -3, 1], [5], [5, 0], [5, 0, -2, -3], [0], [0, -2, -3], [-2, -3]
+------------------------------------------------------------------------------------------------------------------------
+Input: nums = [5], k = 9
+Output: 0
+"""
+
+
+
+def function_2(input_set,debug) -> bool:
+    arr, k = input_set
+    hash_map, prefix_sum = defaultdict(), 0
+    result = 0
+    for num in arr:
+        prefix_sum += num
+        if prefix_sum % k == 0:
+            result += 1
+        result += hash_map.get(prefix_sum % k, 0)
+        hash_map[prefix_sum % k] = hash_map.get(prefix_sum % k, 0) + 1
+    return result
