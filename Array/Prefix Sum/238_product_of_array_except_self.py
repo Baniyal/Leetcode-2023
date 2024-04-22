@@ -15,6 +15,23 @@ Output: [0,0,9,0,0]
 
 nums = [-1, 1, 0, -3, 3]
 
+#TODO: THIS AGAIN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def productExceptSelf(nums):
     n = len(nums)
