@@ -1,35 +1,39 @@
 """
-Given an integer array nums of unique elements, return all possible
-subsets
- (the power set).
-
+Given an integer array nums of unique elements, return all possible subsets (the power set).
 The solution set must not contain duplicate subsets. Return the solution in any order.
-
-the subsets of {1,2,3} are ;, {1}, {2}, {3}, {1,2}, {1,3}, {2,3} and {1,2,3}
-subsets = [1,2,3]
+the subsets of {1,2,3} are ;, {1}, {2}, {3}, {1,2}, {1,3}, {2,3} and {1,2,3}.
 """
-nums = [0]
 
-
-def subsets(nums):
+def function(arr: list,debug) -> int:
     result = []
-    n = len(nums)
-
-    def rec_func(nums, index, path):
-        print("current index------------->", index)
-        print("array left---------------->", nums[index:])
-        print("subsets created----------->", result)
-        print("curr path------------------<", path)
-        print("\n")
-
-        if index == len(nums):
+    def recursive_function(array, index, path):
+        if index == len(array):
             result.append(path)
+        if index < len(array):
+            recursive_function(array, index+1, path)
+            recursive_function(array, index+1, path + [array[index]])
 
-        if index < n:
-            rec_func(nums, index + 1, path)
-            rec_func(nums, index + 1, path + [nums[index]])
+    recursive_function(arr,0,[])
+    return sorted(result)
 
-    rec_func(nums, 0, [])
-    return result
 
-print(subsets(nums))
+TEST_CASES = [
+                ([1,2,3] ,[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]),
+                ([0], [[],[0]])
+             ]
+
+DEBUG = False
+
+for test_case, expected_result in TEST_CASES:
+    actual_result = function(test_case,debug=DEBUG)
+    if actual_result == expected_result:
+        print(f"PASSED")
+    else:
+        print(f"FAILED \nTest Case {test_case} . With actual result: {actual_result} \n and expected result: {expected_result}")
+    print("--------------------------------")
+    if DEBUG:
+        break
+
+
+
+
