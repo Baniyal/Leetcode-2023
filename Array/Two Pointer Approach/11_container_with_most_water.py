@@ -22,24 +22,22 @@ But this value will be always less than h(j), So both factors in the calculation
 hence we can skip considering all the cases where i = 1, 2, 3, ..., height.size()-2 and j = height.size()-1
 Which basically means that we can simply move j to j-1.
 """
-HEIGHT = [1,8,6,2,5,4,8,3,7]
-
-
-def maxArea(height):
+def function(height: list,debug) -> int:
     length_of_array = len(height)
-    left, right = 0 , length_of_array - 1
+    left, right = 0, length_of_array - 1
     result = 0
     while left < right:
         left_height, right_height = height[left], height[right]
-        curr_capacity = min(left_height, right_height)*(right - left)
-        result = max(result,curr_capacity)
-        print("left------------>", left)
-        print("right----------->", right)
-        print("left height----->", left_height)
-        print("right height---->", right_height)
-        print("curr_capacity--->", curr_capacity)
-        print("result---------->", result)
-        print("\n")
+        curr_capacity = min(left_height, right_height) * (right - left)
+        result = max(result, curr_capacity)
+        if debug:
+            print("left------------>", left)
+            print("right----------->", right)
+            print("left height----->", left_height)
+            print("right height---->", right_height)
+            print("curr_capacity--->", curr_capacity)
+            print("result---------->", result)
+            print("-----------------\n")
         if left_height >= right_height:
             right -= 1
         elif left_height < right_height:
@@ -47,6 +45,24 @@ def maxArea(height):
     return result
 
 
-print(maxArea(HEIGHT))
+TEST_CASES = [
+                ["tmmzuxt", 5],
+                ["abcabcbb"         ,       3],
+                ["bbbbb"            ,       1],
+                ["pwwkew"           ,       3],
+                [""                 ,       0],
+                ["d"                ,       1],
 
+             ]
 
+DEBUG = False
+
+for test_case, expected_result in TEST_CASES:
+    actual_result = function(test_case,debug=DEBUG)
+    if actual_result == expected_result:
+        print(f"PASSED")
+    else:
+        print(f"FAILED \nTest Case {test_case} . With actual result: {actual_result} \n and expected result: {expected_result}")
+    print("--------------------------------")
+    if DEBUG:
+        break
