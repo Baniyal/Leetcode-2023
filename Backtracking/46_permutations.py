@@ -19,6 +19,8 @@ Return ans.
 
 input_array = [1, 1, 2]
 
+#TODO: do this again
+
 
 def permute(nums):
     result = []
