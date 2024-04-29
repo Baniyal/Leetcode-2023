@@ -42,7 +42,6 @@ def function(input_arr, debug:bool) -> list:
 
     return result
 
-    print(diff)
 
 TEST_CASES = [
                 (( [1,2,3,4,5], [3,4,5,1,2]),        3),
