@@ -23,56 +23,14 @@ from collections import deque
 def function(arr:list)-> int:
     return None
 
-def orangesRotting(grid):
-    m, n = len(grid), len(grid[0])
-    result = 0
-    fresh_oranges = 0
-    rotten_positions = deque([])
-    for i in range(m):
-        for j in range(n):
-            if grid[i][j] == 2:
-                rotten_positions.append([i, j, 0])
-            if grid[i][j] == 1:
-                fresh_oranges += 1
-    visited = [[False] * n for _ in range(m)]
-    while rotten_positions:
-
-        curr_rotten_orange = rotten_positions.popleft()
-
-
-        cro_x, cro_y, temp = curr_rotten_orange
-        if visited[cro_x][cro_y]:
-            continue
-        visited[cro_x][cro_y] = True
-        print("curr_rotten_orange---------->", curr_rotten_orange[:2])
-
-        print("rotten_positions ----------->", rotten_positions)
-
-        print("max time so far------------->", result)
-        print("fresh oranges left---------->", fresh_oranges)
-
-        print("visited array -------------->", visited)
-        result = max(temp, result)
-        for x, y in [[0, 1], [1, 0], [0, -1], [-1, 0]]:
-            nro_x, nro_y = cro_x + x, cro_y + y
-            if 0 <= nro_x < m and 0 <= nro_y < n and visited[nro_x][nro_y] == False and grid[nro_x][nro_y] == 1 and grid[nro_x][nro_y] != 2:
-                if [nro_x, nro_y, temp + 1] in rotten_positions : continue
-                rotten_positions.append([nro_x, nro_y, temp + 1])
-                fresh_oranges -= 1
-
-        print("\n")
-    print("FRESH",fresh_oranges)
-    if fresh_oranges > 0:
-        return -1
-    return result
-
-
 
 
 TEST_CASES = [
                 (   [[2,1,1],[1,1,0],[0,1,1]],   4   ),
                 (   [[2,1,1],[0,1,1],[1,0,1]],  -1   ),
-                (   [[0,2]]                  ,   0   )
+                (   [[0,2]]                  ,   0   ),
+                ([[2,1,1],[1,1,0],[0,1,1]]   ,   4   ),
+                ([[1,2,0],[1,2,0],[2,0,0],[1,1,0],[1,1,0],[0,0,1]] ,   -1   )
              ]
 
 DEBUG = False

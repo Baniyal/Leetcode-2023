@@ -28,8 +28,6 @@ def function(input_arr, debug:bool) -> list:
     max_count = count.most_common()[0][1]
     reverse_count =  defaultdict(list)
     for key, value in count.most_common():
-        # if value < max_count:
-        #     break
         reverse_count[value].append(key)
     maximum_count_tasks = len(reverse_count[max_count])
     return max(len(arr), (n+1)*(max_count - 1) + maximum_count_tasks )
