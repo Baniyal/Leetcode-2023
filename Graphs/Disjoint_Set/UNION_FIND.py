@@ -1,4 +1,5 @@
 # UnionFind class
+import collections
 class UnionFind:
     def __init__(self, size):
         self.root = [i for i in range(size)]
@@ -8,7 +9,7 @@ class UnionFind:
             return x
         self.root[x] = self.find(self.root[x])
         return self.root[x]
-    def union(self, x, y,timestamp):
+    def union(self, x, y):
         root_X = self.find(x)
         root_Y = self.find(y)
 
@@ -21,6 +22,16 @@ class UnionFind:
     def get_number_of_components(self):
         return self.count
 
+    def get_components(self):
+        components = collections.defaultdict(list)
+        for i in range(len(self.root)):
+            root = self.find(i)  # Find the root of each element
+            components[root].append(i)  # Group by root
+
+        return list(components.values())
+
+    def connected(self,x,y):
+        return self.find(x) == self.find(y)
 def main():
     uf = UnionFind(10)
     uf.union(1, 2)
@@ -36,6 +47,7 @@ def main():
     uf.union(9, 4)
     print(uf.connected(4, 9))  # true
     print(uf)
+    print(uf.get_components())
 
 if __name__ == "__main__":
     main()
