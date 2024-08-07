@@ -2,27 +2,24 @@
 class UnionFind:
     def __init__(self, size):
         self.root = [i for i in range(size)]
-
-    def __repr__(self):
-        return f"UnionFind({self.root})"
-
+        self.count = size
     def find(self, x):
         if x == self.root[x]:
             return x
         self.root[x] = self.find(self.root[x])
         return self.root[x]
+    def union(self, x, y,timestamp):
+        root_X = self.find(x)
+        root_Y = self.find(y)
 
-    def union(self, x, y):
-        rootX = self.find(x)
-        rootY = self.find(y)
-        if rootX != rootY:
-            self.root[rootY] = rootX
+        if root_X == root_Y:
+            return False
 
-    def connected(self, x, y):
-        return self.find(x) == self.find(y)
-    def connected(self, x, y):
-        return self.find(x) == self.find(y)
-
+        self.root[root_Y] = root_X
+        self.count -= 1
+        return True
+    def get_number_of_components(self):
+        return self.count
 
 def main():
     uf = UnionFind(10)
