@@ -29,7 +29,7 @@ class UnionFind:
 
         if root_X == root_Y:
             return False
-
+        self.parent[root_X] = root_Y
         self.components -= 1
         return True
 
