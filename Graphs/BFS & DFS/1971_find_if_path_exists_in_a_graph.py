@@ -17,7 +17,9 @@ Input: n = 6, edges = [[0,1],[0,2],[3,5],[5,4],[4,3]], source = 0, destination =
 Output: false
 Explanation: There is no path from vertex 0 to vertex 5.
 """
-from collections import defaultdict
+from collections import defaultdict, deque
+
+
 def function(input_arr: list) -> int:
     n, edges, source, destination = input_arr
     graph = defaultdict(list)
@@ -39,8 +41,24 @@ def function(input_arr: list) -> int:
 
         return False
 
+    def bfs(source,destination):
+        queue = deque([source])
+        visited = [False] * n
+        while queue:
+            curr_node = queue.popleft()
+            visited[curr_node] = True
+            print(f"Current node getting processed is {curr_node}")
+            if curr_node == destination:
+                return True
+            for neighbor in graph[curr_node]:
+                if not visited[neighbor] :
+                    print(f"Neighbor {neighbor} is added to the queue")
+                    queue.append(neighbor)
 
-    return  dfs(source,destination,set())
+        return False
+
+
+    return bfs(source,destination)
 
 TEST_CASES = [
                        ((3, [[0,1],[1,2],[2,0]],             0,  2), True ),
