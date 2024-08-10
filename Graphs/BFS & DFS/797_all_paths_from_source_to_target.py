@@ -24,9 +24,12 @@ graph[i][j] != i (i.e., there will be no self-loops).
 All the elements of graph[i] are unique.
 The input graph is guaranteed to be a DAG.
 """
-from collections import defaultdict
+from collections import defaultdict, deque
+
+
 def function(input_arr: list) -> int:
     edges = input_arr
+    n = len(edges)
     graph = defaultdict(list)
     for vertex in range(len(edges)):
         graph[vertex].extend(edges[vertex])
@@ -41,6 +44,32 @@ def function(input_arr: list) -> int:
             if neighbour not in visited:
                 dfs(neighbour,destination,path + [source],visited)
         visited.remove(source)
+
+
+
+
+    def bfs(source):
+        paths = []
+        if not graph or len(graph) == 0:
+            return paths
+
+        queue = deque()
+        path = [source]
+        queue.append(path)
+
+        while queue:
+            current_path = queue.popleft()
+            node = current_path[-1]
+            for next_node in graph[node]:
+                temp_path = current_path.copy()
+                temp_path.append(next_node)
+
+                if next_node == len(graph) - 1:
+                    paths.append(temp_path)
+                else:
+                    queue.append(temp_path)
+        return paths
+
 
     result = []
     dfs(0,len(edges)-1,[],set())
